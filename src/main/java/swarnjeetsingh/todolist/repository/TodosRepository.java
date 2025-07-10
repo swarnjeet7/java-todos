@@ -10,6 +10,6 @@ public interface TodosRepository extends JpaRepository<TodoModel, Long>  {
 
     public TodoModel findById(long id);
 
-    public List<TodoModel> findTodoModelByCreatedAtBefore(LocalDateTime date);
+    public List<TodoModel> findTodoModelByCreatedAtBeforeAndActiveTrue(LocalDateTime date);
 
 }
