@@ -24,11 +24,10 @@ public class TodoController {
 
     @PostMapping
     public TodoModel addTodo(@RequestBody TodoModel todo) {
-        todoService.addTodo(todo);
-        return todo;
+        return todoService.addTodo(todo);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("getById/{id}")
     public TodoModel getTodo(@PathVariable int id) {
         return todoService.getTodoById(id);
     }

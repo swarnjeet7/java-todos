@@ -25,10 +25,9 @@ public class TodoService {
         return todos;
     }
 
-    public void addTodo(TodoModel todoModel) {
+    public TodoModel addTodo(TodoModel todoModel) {
         logger.info("Adding a new todo: {}", todoModel.getTask());
-        todosRepository.save(todoModel);
-        logger.info("Todo added successfully");
+        return todosRepository.save(todoModel);
     }
 
     public TodoModel getTodoById(int id) {
@@ -44,6 +43,5 @@ public class TodoService {
         logger.info("DeActivated todo with id: {}", id);
         return todo;
     }
-
 
 }
