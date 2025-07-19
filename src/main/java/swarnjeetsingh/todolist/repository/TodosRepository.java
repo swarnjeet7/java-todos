@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TodosRepository extends JpaRepository<TodoModel, Long>  {
 
+    public List<TodoModel> findByActiveTrue();
+
     public TodoModel findById(long id);
 
     public List<TodoModel> findTodoModelByCreatedAtBeforeAndActiveTrue(LocalDateTime date);
