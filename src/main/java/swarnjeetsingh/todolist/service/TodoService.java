@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -30,18 +31,23 @@ public class TodoService {
         return todosRepository.save(todoModel);
     }
 
-    public TodoModel getTodoById(int id) {
+    public Optional<TodoModel> getTodoById(int id) {
         logger.info("Retrieving todo with id: {}", id);
-        return todosRepository.findById(id);
+        return Optional.ofNullable(todosRepository.findById(id));
     }
 
-    public TodoModel deleteTodoById(int id) {
+    public Optional<TodoModel> deleteTodoById(int id) {
         logger.info("Deleting todo with id: {}", id);
-        TodoModel todo = todosRepository.findById(id);
-        todo.setActive(false);
-        todosRepository.save(todo);
-        logger.info("DeActivated todo with id: {}", id);
-        return todo;
+        Optional<TodoModel> optionalTodo = Optional.ofNullable(todosRepository.findById(id));
+
+        if(optionalTodo.isPresent()) {
+            TodoModel todo = optionalTodo.get();
+            todo.setActive(false);
+            todosRepository.save(todo);
+            logger.info("DeActivated todo with id: {}", id);
+            return Optional.of(todo);
+        }
+        return Optional.empty();
     }
 
 }
