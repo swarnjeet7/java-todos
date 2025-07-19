@@ -20,7 +20,7 @@ public class TodoService {
 
     public List<TodoModel> getAllTodos() {
         logger.info("Retrieving all todos");
-        List<TodoModel> todos = todosRepository.findAll();
+        List<TodoModel> todos = todosRepository.findByActiveTrue();
         logger.debug("Todos retrieved: {}", todos);
         return todos;
     }
