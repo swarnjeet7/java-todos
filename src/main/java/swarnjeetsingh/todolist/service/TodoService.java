@@ -42,8 +42,9 @@ public class TodoService {
         todoModel.setDescription(todo.description());
         todoModel.setCompleted(todo.completed());
 
-        return ResponseEntity.ok(TodoResponse.builder()
-                .statusCode(HttpStatus.OK.value())
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(TodoResponse.builder()
+                .statusCode(HttpStatus.CREATED.value())
                 .message("success")
                 .success(true)
                 .data(todosRepository.save(todoModel))
