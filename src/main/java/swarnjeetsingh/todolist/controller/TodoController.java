@@ -1,7 +1,5 @@
 package swarnjeetsingh.todolist.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,6 @@ import swarnjeetsingh.todolist.service.TodoService;
 @RequestMapping("/todos")
 public class TodoController {
     private final TodoService todoService;
-    private static final Logger logger = LoggerFactory.getLogger(TodoService.class);
 
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
@@ -30,12 +27,12 @@ public class TodoController {
         return todoService.addTodo(todo);
     }
 
-    @GetMapping("getById/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<TodoResponse> getTodo(@PathVariable int id) {
         return todoService.getTodoById(id);
     }
 
-    @DeleteMapping("deleteById/{id}")
+    @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<TodoResponse> deleteTodo(@PathVariable int id) {
         return todoService.deleteTodoById(id);
     }
