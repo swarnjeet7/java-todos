@@ -1,12 +1,12 @@
 package swarnjeetsingh.todolist.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import swarnjeetsingh.todolist.model.TodoModel;
+import swarnjeetsingh.todolist.model.TodoModelDTO;
+import swarnjeetsingh.todolist.model.response.TodoResponse;
 import swarnjeetsingh.todolist.service.TodoService;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/todos")
@@ -17,23 +17,28 @@ public class TodoController {
         this.todoService = todoService;
     }
 
-    @GetMapping
-    public List<TodoModel> getAllTodos() {
+    @GetMapping("/getAll")
+    public ResponseEntity<TodoResponse> getAllTodos() {
         return todoService.getAllTodos();
     }
 
-    @PostMapping
-    public TodoModel addTodo(@RequestBody TodoModel todo) {
+    @PostMapping("/create")
+    public ResponseEntity<TodoResponse> addTodo(@Validated @RequestBody TodoModelDTO todo) {
         return todoService.addTodo(todo);
     }
 
-    @GetMapping("getById/{id}")
-    public TodoModel getTodo(@PathVariable int id) {
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<TodoResponse> getTodo(@PathVariable int id) {
         return todoService.getTodoById(id);
     }
 
-    @DeleteMapping("{id}")
-    public TodoModel deleteTodo(@PathVariable int id) {
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity<TodoResponse> deleteTodo(@PathVariable int id) {
         return todoService.deleteTodoById(id);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<TodoResponse> updateTodo(@RequestBody TodoModel updatedTodo) {
+        return todoService.updateTodo(updatedTodo);
     }
 }
